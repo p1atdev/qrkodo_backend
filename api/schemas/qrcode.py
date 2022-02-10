@@ -10,12 +10,12 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
 class QRCodeDrawer(enum.Enum):
-    Square = "Square"
-    GappedSquare = "GappedSquare"
-    Circle = "Circle"
-    Rounded = "Rounded"
-    VerticalBars = "VerticalBars"
-    HorizontalBars = "HorizontalBars"
+    Square: str = "Square"
+    GappedSquare: str = "GappedSquare"
+    Circle: str = "Circle"
+    Rounded: str = "Rounded"
+    VerticalBars: str = "VerticalBars"
+    HorizontalBars: str = "HorizontalBars"
 
 class QRCodeStyle(BaseModel):
     size: int = Field(example=32, description="QRコードのサイズ")
@@ -26,4 +26,4 @@ class QRCodeStyle(BaseModel):
 
 class QRGenerateParameter(QRCodeStyle):
     text: str = Field(..., example="https://example.com", description="QRコードの文字列")
-    
+
