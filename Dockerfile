@@ -2,10 +2,12 @@
 FROM python:3.9-buster
 ENV PYTHONUNBUFFERED=1
 
+COPY ./ /src
+
 WORKDIR /src
 
 # pipを使ってpoetryをインストール
-RUN pip install poetry
+RUN pip install poetry[standard]
 
 # poetryの定義ファイルをコピー (存在する場合)
 COPY pyproject.toml* poetry.lock* ./
