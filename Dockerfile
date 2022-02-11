@@ -2,9 +2,13 @@
 FROM python:3.9-buster
 ENV PYTHONUNBUFFERED=1
 
-COPY ./ /src
+# WORKDIR /src
 
-WORKDIR /src
+COPY ./app /app
+
+WORKDIR /app
+
+EXPOSE 8000
 
 # pipを使ってpoetryをインストール
 RUN pip install poetry[standard]
@@ -16,5 +20,6 @@ COPY pyproject.toml* poetry.lock* ./
 RUN poetry config virtualenvs.in-project true
 RUN if [ -f pyproject.toml ]; then poetry install; fi
 
+
 # uvicornのサーバーを立ち上げる
-ENTRYPOINT ["poetry", "run", "uvicorn", "api.main:app", "--host", "0.0.0.0", "--reload"]
+ENTRYPOINT ["poetry", "run", "uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
